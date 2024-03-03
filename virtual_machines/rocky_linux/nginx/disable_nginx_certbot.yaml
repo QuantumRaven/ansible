@@ -1,0 +1,45 @@
+---
+- name: Play for uninstalling web packages
+  hosts: all
+  become: true
+  remote_user: quantumcrow
+  gather_facts: true
+  tasks:
+
+# Individual packages
+
+    - name: Install nginx
+      ansible.builtin.dnf:
+        name: nginx
+        state: absent
+    - name: Install fail2ban
+      ansible.builtin.dnf:
+        name: fail2ban
+        state: absent
+    - name: Install certbot
+      ansible.builtin.dnf:
+        name: certbot
+        state: absent
+    - name: Install nginx plugin for certbot
+      ansible.builtin.dnf:
+        name: python3-certbot-nginx
+        state: absent
+
+# Start and enable services
+    - name: Enable firewalld
+      systemd:
+        name: firewalld
+        state: absent
+        enabled: no
+
+# Close ports
+    - name: Open port http
+      ansible.posix.firewalld:
+        port: 80/tcp
+        permanent: false
+        state: disabled
+    - name: Open port for https
+      ansible.posix.firewalld:
+        port: 443/tcp
+        permanent: false
+        state: disabled

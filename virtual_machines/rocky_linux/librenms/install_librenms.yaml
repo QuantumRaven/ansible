@@ -1,0 +1,23 @@
+---
+- name: Play for installing LibreNMS
+  hosts: all
+  become: true
+  remote_user: quantumcrow
+  gather_facts: true
+  tasks:
+
+# Individual packages
+    
+    - name: Install postgresql
+      ansible.builtin.dnf:
+        name: postgresql
+        state: present
+    - name: 
+
+# Enable services
+
+    - name: service
+      systemd:
+        name: service_name
+        state: started
+        enabled: yes

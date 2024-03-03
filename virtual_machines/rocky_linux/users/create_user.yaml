@@ -1,0 +1,25 @@
+---
+- name: Play for creating users
+  hosts: all
+  become: true
+  remote_user: root
+  gather_facts: true
+
+  vars:
+    username: quantumcrow
+
+  tasks:
+    - name: Create user
+      ansible.builtin.user:
+        append: true
+        create_home: true
+        groups: wheel
+        shell: /bin/bash
+        name: "{{ username }}"
+        password: $6$nlSAnb.TP4/1wl5O$IuccIgjhgqreRhjpnqY/9OLl8mxnIXM7lEadAfAIHMGbPiipS7Mpx3YNqU6C42aqat//Ra7eg5M4HE2nDAZZk0
+
+    - name: Set authorized key from file
+      ansible.posix.authorized_key:
+        user: quantumcrow
+        state: present
+        key: "{{ lookup('file', '/home/quantumcrow/.ssh/quantumcrow.pub') }}"

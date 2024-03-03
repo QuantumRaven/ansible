@@ -1,0 +1,20 @@
+---
+- name: Play for installing web packages
+  hosts: all
+  become: true
+  remote_user: quantumcrow
+  gather_facts: false
+  tasks:
+
+# Individual packages
+
+    - name: Install postgresql
+      ansible.builtin.dnf:
+        name: postgresql
+        state: present
+    - name: Setup pgadmin repo
+      ansible.builtin.command: rpm -i https://ftp.postgresql.org/pub/pgadmin/pgadmin4/yum/pgadmin4-redhat-repo-2-1.noarch.rpm
+    - name: Install pgadmin
+      ansible.builtin.dnf:
+        name: pgadmin4-web
+        state: present

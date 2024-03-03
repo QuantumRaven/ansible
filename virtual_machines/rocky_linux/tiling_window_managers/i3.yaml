@@ -1,0 +1,14 @@
+---
+- name: Play for installing i3 tiling window manager
+  hosts: all
+  become: true
+  remote_user: quantumcrow
+  gather_facts: true
+  tasks:
+
+# Individual packages
+    
+    - name: Install i3
+      ansible.builtin.dnf:
+        name: i3
+        state: present

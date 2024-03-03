@@ -1,0 +1,37 @@
+---
+- name: Play for installing starting packages and enabling CRB for the epel-release
+  hosts: all
+  become: true
+  remote_user: quantumcrow
+  gather_facts: true
+  tasks:
+
+# Individual packages
+
+    - name: Install firewalld
+      ansible.builtin.dnf:
+        name: firewalld.noarch
+        state: present
+    - name: Install git
+      ansible.builtin.dnf:
+        name: git
+        state: present
+    - name: Install vim-ehanced
+      ansible.builtin.dnf:
+        name: vim-enhanced
+        state: present
+    - name: Install strace
+      ansible.builtin.dnf:
+        name: strace
+        state: present
+    - name: Install epel-release
+      ansible.builtin.dnf:
+        name: epel-release
+        state: present
+        enablerepo: epel
+
+# Enable epel-release
+    - name: Enable CRB repository
+      community.general.dnf_config_manager:
+        name: crb
+        state: enabled

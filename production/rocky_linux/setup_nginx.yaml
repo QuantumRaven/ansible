@@ -1,0 +1,50 @@
+---
+- name: Play for installing web packages
+  hosts: all
+  become: true
+  remote_user: quantumcrow
+  gather_facts: true
+  tasks:
+
+# Individual packages
+
+    - name: Install nginx
+      ansible.builtin.dnf:
+        name: nginx-1:1.20.1-14.el9_2.1.x86_64
+        state: present
+    - name: Install fail2ban
+      ansible.builtin.dnf:
+        name: fail2ban-all-1.0.2-7.el9.noarch
+        state: present
+    - name: Install certbot
+      ansible.builtin.dnf:
+        name: certbot-2.6.0-1.el9.noarch
+        state: present
+    - name: Install nginx plugin for certbot
+      ansible.builtin.dnf:
+        name: python3-certbot-nginx-2.6.0-1.el9.noarch
+        state: present
+
+# Start and enable services
+    - name: Enable firewalld
+      systemd:
+        name: firewalld
+        state: started
+        enabled: yes
+    - name: Enable nginx
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
+# Open ports
+    - name: Open port http
+      ansible.posix.firewalld:
+        port: 80/tcp
+        permanent: true
+        state: enabled
+    - name: Open port for https
+      ansible.posix.firewalld:
+        port: 443/tcp
+        permanent: true
+        state: enabled

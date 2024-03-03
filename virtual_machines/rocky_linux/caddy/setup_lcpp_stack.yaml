@@ -1,0 +1,42 @@
+---
+- name: Play for installing web packages
+  hosts: all
+  become: true
+  remote_user: quantumcrow
+  gather_facts: true
+  tasks:
+
+# Individual packages
+
+    - name: Install caddy
+      ansible.builtin.dnf:
+        name: caddy
+        state: present
+    
+    - name: Install postgresql
+      ansible.builtin.dnf:
+        name: postgresql
+        state: present
+
+    - name: Install php
+      ansible.builtin.dnf:
+        name: php
+        state: present
+    
+    - name: Install firewalld
+      ansible.builtin.dnf:
+        name: firewalld
+        state: present
+    
+# Start and enable services
+    - name: Enable firewalld
+      systemd:
+        name: firewalld
+        state: started
+        enabled: yes
+
+    - name: Enable caddy
+      systemd:
+        name: caddy
+        state: started
+        enabled: yes
