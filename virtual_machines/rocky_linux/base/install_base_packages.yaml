@@ -6,7 +6,7 @@
   gather_facts: true
   tasks:
 
-# Individual packages   
+# Individual packages
     - name: Install epel-release
       ansible.builtin.dnf:
         name: epel-release
@@ -14,23 +14,15 @@
         enablerepo: epel
     - name: Enable epel-release
       ansible.builtin.command: dnf config-manager --set-enabled crb
-    - name: Install firewalld
-      ansible.builtin.dnf:
-        name: firewalld.noarch
+    - name: Install packages
+      package:
+        name: "{{item}}"
         state: present
-    - name: Install git
-      ansible.builtin.dnf:
-        name: git
-        state: present
-    - name: Install vim-ehanced
-      ansible.builtin.dnf:
-        name: vim-enhanced
-        state: present
-    - name: Install strace
-      ansible.builtin.dnf:
-        name: strace
-        state: present
-    - name: Install fd-find
-      ansible.builtin.dnf:
-        name: fd-find
-        state: present
+      loop:
+        - firewalld
+        - git
+        - vim-enhanced
+        - strace
+        - fd-find
+        - bat
+        - fzf
