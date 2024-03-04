@@ -30,7 +30,7 @@
       ansible.builtin.dnf:
         name: strace
         state: present
-    - name: Install fd
+    - name: Install fd-find
       ansible.builtin.dnf:
-        name: fd
+        name: fd-find
         state: present
