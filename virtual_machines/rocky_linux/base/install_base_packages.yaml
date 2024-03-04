@@ -30,3 +30,7 @@
       ansible.builtin.dnf:
         name: strace
         state: present
+    - name: Install fd
+      ansible.builtin.dnf:
+        name: fd
+        state: present
