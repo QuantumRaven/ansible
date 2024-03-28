@@ -10,11 +10,11 @@
 
     - name: Install nginx
       ansible.builtin.dnf:
-        name: nginx-1:1.20.1-14.el9_2.1.x86_64
+        name: nginx
         state: present
     - name: Install fail2ban
       ansible.builtin.dnf:
-        name: fail2ban-all-1.0.2-7.el9.noarch
+        name: fail2ban
         state: present
     - name: Install certbot
       ansible.builtin.dnf:
