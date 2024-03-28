@@ -18,11 +18,11 @@
         state: present
     - name: Install certbot
       ansible.builtin.dnf:
-        name: certbot-2.6.0-1.el9.noarch
+        name: certbot
         state: present
     - name: Install nginx plugin for certbot
       ansible.builtin.dnf:
-        name: python3-certbot-nginx-2.6.0-1.el9.noarch
+        name: python3-certbot-nginx
         state: present
 
 # Start and enable services
