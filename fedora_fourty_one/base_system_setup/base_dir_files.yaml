@@ -1,0 +1,19 @@
+---
+- name: Play for 
+  hosts: localhost
+  become: true
+  remote_user: quantumcrow
+  gather_facts: true
+  tasks:
+
+# Individual packages
+    
+    - name: Create .local dir
+      ansible.builtin.file:
+        path: /home/quantumcrow/.local
+        state: directory
+
+    - name: Create bin in ~/.local
+      ansible.builtin.file:
+        path: /home/quantumcrow/.local/bin
+        state: directory

@@ -1,0 +1,38 @@
+---
+- name: Play for installing starting packages
+  hosts: localhost
+  become: true
+  remote_user: quantumcrow
+  gather_facts: true
+  tasks:
+
+# Individual packages
+    - name: Install packages
+      package:
+        name: "{{item}}"
+        state: present
+      loop:
+        - firewalld
+        - git
+        - vim-enhanced
+        - strace
+        - fd-find
+        - bat
+        - fzf
+        - neovim
+        - duf
+        - lshw
+        - black
+        - flake8
+        - bat
+        - fuse
+        - fuse-libs
+        - ripgrep
+        - keepassxc
+        - obs-studio
+        - inkscape
+        - krita
+        - xournalpp
+        - fastfetch
+        - zeal
+        - librewolf
