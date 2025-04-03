@@ -12,11 +12,13 @@
       ansible.builtin.file:
         path: ~/.local
         state: directory
+        mode: "0755"
 
     - name: Create bin in ~/.local
       ansible.builtin.file:
         path: ~/.local/bin
         state: directory
+        mode: "0755"
 
     - name: Create fonts dir
       ansible.builtin.file:
@@ -31,8 +33,6 @@
         path: ~/.ssh
         state: directory
         mode: "0700"
-        owner: quantumcrow
-        group: quantumcrow
 
 # Create workspace for github projects
     - name: Create workspace for GitHub projects
@@ -83,6 +83,12 @@
         dest: ~/.config
 
 # Download & install Nerd Font
+
+    - name: Create ~/temp directory
+      ansible.builtin.file:
+        path: ~/temp
+        state: directory
+        mode: "0755"
 
     - name: Download Nerd Font
       ansible.builtin.get_url:
