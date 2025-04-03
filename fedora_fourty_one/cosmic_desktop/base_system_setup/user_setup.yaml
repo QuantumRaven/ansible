@@ -75,10 +75,10 @@
     - name: Download Nerd Font
       ansible.builtin.get_url:
         url: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
-        dest: "/tmp/FiraCode.zip"
+        dest: "~/temp/FiraCode.zip"
 
     - name: Decompress Nerd Font
       ansible.builtin.unarchive:
-        src: "/tmp/FiraCode.zip"
+        src: "~/temp/FiraCode.zip"
         dest: "/home/quantumcrow/.fonts"
         remote_src: yes
