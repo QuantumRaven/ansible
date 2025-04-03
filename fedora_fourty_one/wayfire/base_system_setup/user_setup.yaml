@@ -24,13 +24,6 @@
         state: directory
         mode: "0755"
 
-# Create github_projects directory
-
-    - name: Create github_projects dir
-      ansible.builtin.file:
-        path: /home/quantumcrow/github_projects
-        state: directory
-
 # Create .ssh directory
 
     - name: Create .ssh directory
@@ -41,12 +34,21 @@
         owner: quantumcrow
         group: quantumcrow
 
+# Create workspace for github projects
+    - name: Create workspace for GitHub projects
+      ansible.builtin.file:
+        path: /home/quantumcrow/workspace/github_projects/quantumraven
+        state: directory
+        mode: "0755"
+        owner: quantumcrow
+        group: quantumcrow
+
 # Clone dot-files repo
 
     - name: Clone dot-files repo
       ansible.builtin.git:
         repo: https://github.com/QuantumRaven/dot-files.git
-        dest: /home/quantumcrow/github_projects/dot-files/
+        dest: /home/quantumcrow/workspace/github_projects/quantumraven/dot-files
 
 # Sync dot-file contents to ~/.config/
 
@@ -70,7 +72,7 @@
           - "--human-readable"
           - "--progress"
 
-# Download Nerd Font
+# Download & install Nerd Font
 
     - name: Download Nerd Font
       ansible.builtin.get_url:
@@ -80,5 +82,13 @@
     - name: Decompress Nerd Font
       ansible.builtin.unarchive:
         src: "~/temp/FiraCode.zip"
-        dest: "/home/quantumcrow/.fonts"
+        dest: "/home/quantumcrow/.local/share/fonts"
         remote_src: yes
+
+    - name: Remove temp dir from user home dir
+      ansible.builtin.file:
+        path: "~/temp"
+        state: absent
+
+    - name: Reset user fonts
+      command: fc-cache -fv ~/.local/share/fonts 
