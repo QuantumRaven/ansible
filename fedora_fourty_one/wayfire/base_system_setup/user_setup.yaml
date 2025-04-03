@@ -10,17 +10,17 @@
 
     - name: Create .local dir
       ansible.builtin.file:
-        path: /home/quantumcrow/.local
+        path: ~/.local
         state: directory
 
     - name: Create bin in ~/.local
       ansible.builtin.file:
-        path: /home/quantumcrow/.local/bin
+        path: ~/.local/bin
         state: directory
 
     - name: Create fonts dir
       ansible.builtin.file:
-        path: /home/quantumcrow/.local/share/fonts
+        path: ~/.local/share/fonts
         state: directory
         mode: "0755"
 
@@ -28,7 +28,7 @@
 
     - name: Create .ssh directory
       ansible.builtin.file:
-        path: /home/quantumcrow/.ssh
+        path: ~/.ssh
         state: directory
         mode: "0700"
         owner: quantumcrow
@@ -37,7 +37,7 @@
 # Create workspace for github projects
     - name: Create workspace for GitHub projects
       ansible.builtin.file:
-        path: /home/quantumcrow/workspace/github_projects/quantumraven
+        path: ~/workspace/github_projects/quantumraven
         state: directory
         mode: "0755"
         owner: quantumcrow
@@ -48,14 +48,14 @@
     - name: Clone dot-files repo
       ansible.builtin.git:
         repo: https://github.com/QuantumRaven/dot-files.git
-        dest: /home/quantumcrow/workspace/github_projects/quantumraven/dot-files
+        dest: ~/workspace/github_projects/quantumraven/dot-files
 
 # Sync dot-file contents to ~/.config/
 
     - name: Sync fish directory
       ansible.builtin.synchronize:
-        src: /home/quantumcrow/github_projects/dot-files/fish
-        dest: /home/quantumcrow/.config/
+        src: ~/workspace/github_projects/quantumraven/dot-files/fish
+        dest: ~/.config/
         rsync_opts:
           - "--archive"
           - "--verbose"
@@ -64,13 +64,23 @@
 
     - name: Sync nvim directory
       ansible.builtin.synchronize:
-        src: /home/quantumcrow/github_projects/dot-files/nvim
-        dest: /home/quantumcrow/.config/
+        src: ~/workspace/github_projects/quantumraven/dot-files/nvim
+        dest: ~/.config/
         rsync_opts:
           - "--archive"
           - "--verbose"
           - "--human-readable"
           - "--progress"
+
+    - name: Sync wofi directory
+      ansible.builtin.synchronize:
+      src: ~/workspace/github_projects/quantumraven/dot-files/wofi
+      dest: ~/.config
+
+    - name: Sync wayfire.ini file
+      ansible.builtin.synchronize:
+      src: ~/workspace/github_projects/quantumraven/dot-files/wayfire/trans_theme
+      dest: ~/.config
 
 # Download & install Nerd Font
 
@@ -82,7 +92,7 @@
     - name: Decompress Nerd Font
       ansible.builtin.unarchive:
         src: ~/temp/FiraCode.zip
-        dest: /home/quantumcrow/.local/share/fonts
+        dest: ~/.local/share/fonts
         remote_src: yes
 
     - name: Remove temp dir from user home dir
