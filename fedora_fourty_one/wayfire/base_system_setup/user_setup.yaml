@@ -18,9 +18,9 @@
         path: /home/quantumcrow/.local/bin
         state: directory
 
-    - name: Create .fonts dir
+    - name: Create fonts dir
       ansible.builtin.file:
-        path: /home/quantumcrow/.fonts
+        path: /home/quantumcrow/.local/share/fonts
         state: directory
         mode: "0755"
 
