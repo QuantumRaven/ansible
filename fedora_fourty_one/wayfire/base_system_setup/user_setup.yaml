@@ -77,17 +77,17 @@
     - name: Download Nerd Font
       ansible.builtin.get_url:
         url: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
-        dest: "~/temp/FiraCode.zip"
+        dest: ~/temp/FiraCode.zip
 
     - name: Decompress Nerd Font
       ansible.builtin.unarchive:
-        src: "~/temp/FiraCode.zip"
-        dest: "/home/quantumcrow/.local/share/fonts"
+        src: ~/temp/FiraCode.zip
+        dest: /home/quantumcrow/.local/share/fonts
         remote_src: yes
 
     - name: Remove temp dir from user home dir
       ansible.builtin.file:
-        path: "~/temp"
+        path: ~/temp
         state: absent
 
     - name: Reset user fonts
