@@ -1,6 +1,6 @@
 ---
 - name: Play for installing starting packages
-  hosts: localhost
+  hosts: all
   become: true
   remote_user: quantumcrow
   gather_facts: false

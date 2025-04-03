@@ -1,6 +1,6 @@
 ---
 - name: Play for setting up home directory
-  hosts: localhost
+  hosts: all
   become: false
   remote_user: quantumcrow
   gather_facts: true
