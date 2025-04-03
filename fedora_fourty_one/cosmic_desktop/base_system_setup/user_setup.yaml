@@ -1,0 +1,84 @@
+---
+- name: Play for setting up home directory
+  hosts: localhost
+  become: false
+  remote_user: quantumcrow
+  gather_facts: true
+  tasks:
+
+# Create .local and .local/bin directories
+
+    - name: Create .local dir
+      ansible.builtin.file:
+        path: /home/quantumcrow/.local
+        state: directory
+
+    - name: Create bin in ~/.local
+      ansible.builtin.file:
+        path: /home/quantumcrow/.local/bin
+        state: directory
+
+    - name: Create .fonts dir
+      ansible.builtin.file:
+        path: /home/quantumcrow/.fonts
+        state: directory
+        mode: "0755"
+
+# Create github_projects directory
+
+    - name: Create github_projects dir
+      ansible.builtin.file:
+        path: /home/quantumcrow/github_projects
+        state: directory
+
+# Create .ssh directory
+
+    - name: Create .ssh directory
+      ansible.builtin.file:
+        path: /home/quantumcrow/.ssh
+        state: directory
+        mode: "0700"
+        owner: quantumcrow
+        group: quantumcrow
+
+# Clone dot-files repo
+
+    - name: Clone dot-files repo
+      ansible.builtin.git:
+        repo: https://github.com/QuantumRaven/dot-files.git
+        dest: /home/quantumcrow/github_projects/dot-files/
+
+# Sync dot-file contents to ~/.config/
+
+    - name: Sync fish directory
+      ansible.builtin.synchronize:
+        src: /home/quantumcrow/github_projects/dot-files/fish
+        dest: /home/quantumcrow/.config/
+        rsync_opts:
+          - "--archive"
+          - "--verbose"
+          - "--human-readable"
+          - "--progress"
+
+    - name: Sync nvim directory
+      ansible.builtin.synchronize:
+        src: /home/quantumcrow/github_projects/dot-files/nvim
+        dest: /home/quantumcrow/.config/
+        rsync_opts:
+          - "--archive"
+          - "--verbose"
+          - "--human-readable"
+          - "--progress"
+
+# Download Nerd Font
+
+    - name: Download Nerd Font
+      ansible.builtin.get_url:
+        url: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
+        dest: "/tmp/FiraCode.zip"
+
+    - name: Decompress Nerd Font
+      ansible.builtin.unarchive:
+        src: "/tmp/FiraCode.zip"
+        dest: "/home/quantumcrow/.fonts"
+        remote_src: yes

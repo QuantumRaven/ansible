@@ -1,0 +1,74 @@
+---
+- name: Play for installing starting packages
+  hosts: localhost
+  become: true
+  remote_user: quantumcrow
+  gather_facts: false
+  tasks:
+
+# Individual packages
+
+    - name: Install individual packages
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - firewalld
+        - git
+        - vim-enhanced
+        - strace
+        - fd-find
+        - bat
+        - fzf
+        - neovim
+        - duf
+        - lshw
+        - black
+        - flake8
+        - bat
+        - fuse
+        - fuse-libs
+        - ripgrep
+        - keepassxc
+        - obs-studio
+        - inkscape
+        - krita
+        - xournalpp
+        - fastfetch
+        - zeal
+        - lsd
+        - fish
+        - bash-completion
+        - podman
+        - podman-compose
+        - podman-docker
+
+# Group packages
+
+    - name: Install group packages
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - "@admin-tools"
+        - "@desktop-accessibility"
+        - "@development-tools"
+        - "@kde-apps"
+        - "@kde-desktop"
+        - "@kde-media"
+        - "@kde-pim"
+        - "@libreoffice"
+        - "@system-tools"
+
+# Download and install Starship
+
+    - name: Download Starship install script
+      ansible.builtin.get_url:
+        url: https://starship.rs/install.sh
+        dest: /tmp/starship_install.sh
+        mode: "0755"
+
+    - name: Install Starship
+      command: /tmp/starship_install.sh
+      args:
+        creates: /usr/local/bin/starship
