@@ -43,6 +43,7 @@
         - sd
         - tar
         - unzip
+        - wofi
 
 # Group packages
 
