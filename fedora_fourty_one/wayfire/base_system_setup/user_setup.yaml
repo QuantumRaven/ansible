@@ -74,13 +74,13 @@
 
     - name: Sync wofi directory
       ansible.builtin.synchronize:
-      src: ~/workspace/github_projects/quantumraven/dot-files/wofi
-      dest: ~/.config
+        src: ~/workspace/github_projects/quantumraven/dot-files/wofi
+        dest: ~/.config
 
     - name: Sync wayfire.ini file
       ansible.builtin.synchronize:
-      src: ~/workspace/github_projects/quantumraven/dot-files/wayfire/trans_theme
-      dest: ~/.config
+        src: ~/workspace/github_projects/quantumraven/dot-files/wayfire/trans_theme/wayfire.ini
+        dest: ~/.config
 
 # Download & install Nerd Font
 
