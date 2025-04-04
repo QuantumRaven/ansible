@@ -41,8 +41,6 @@
         path: ~/workspace/github_projects/quantumraven
         state: directory
         mode: "0755"
-        owner: quantumcrow
-        group: quantumcrow
 
 # Clone dot-files repo
 
