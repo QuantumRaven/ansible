@@ -20,7 +20,7 @@ $ sudo dnf install ansible
 
 Wayfire Tiling Window Manager setup
 
-Install applications with sudo_user.yaml first
+Install applications with `sudo_user.yaml` first
 
 ```bash
 $ ansible-playbook -i inventory.ini fedora_fourty_one/wayfire/base_system_setup/sudo_user.yaml -K --limit=[group_name or device_name]
