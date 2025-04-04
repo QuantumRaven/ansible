@@ -26,7 +26,7 @@ Install applications with sudo_user.yaml first
 $ ansible-playbook -i inventory.ini fedora_fourty_one/wayfire/base_system_setup/sudo_user.yaml -K --limit=[group_name or device_name]
 ```
 
-Configure user profile
+Configure user account
 
 ```bash
 $ ansible-playbook -i inventory.ini fedora_fourty_one/wayfire/base_system_setup/user_setup.yaml --limit=[group_name or device_name]
