@@ -35,6 +35,7 @@
         mode: "0700"
 
 # Create workspace for github projects
+    
     - name: Create workspace for GitHub projects
       ansible.builtin.file:
         path: ~/workspace/github_projects/quantumraven
