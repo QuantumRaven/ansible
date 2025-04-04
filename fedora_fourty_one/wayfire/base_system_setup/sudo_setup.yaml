@@ -44,6 +44,8 @@
         - tar
         - unzip
         - wofi
+        - gcc
+        - ripgrep
 
 # Group packages
 
