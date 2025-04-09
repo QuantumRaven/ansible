@@ -100,6 +100,7 @@
           - "--verbose"
           - "--human-readable"
           - "--progress"
+
 # Download & install Nerd Font
 
     - name: Create ~/temp directory
