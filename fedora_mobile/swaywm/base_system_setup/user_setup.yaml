@@ -75,12 +75,31 @@
       ansible.builtin.synchronize:
         src: ~/workspace/github_projects/quantumraven/dot-files/wofi
         dest: ~/.config
+        rsync_opts:
+          - "--archive"
+          - "--verbose"
+          - "--human-readable"
+          - "--progress"
 
-    - name: Sync wayfire.ini file
+    - name: Sync sway directory
       ansible.builtin.synchronize:
-        src: ~/workspace/github_projects/quantumraven/dot-files/wayfire/trans_theme/wayfire.ini
+        src: ~/workspace/github_projects/quantumraven/dot-files/sway
         dest: ~/.config
+        rsync_opts:
+          - "--archive"
+          - "--verbose"
+          - "--human-readable"
+          - "--progress"
 
+    - name: Sync waybar directory
+      ansible.builtin.synchronize:
+        src: ~/workspace/github_projects/quantumraven/dot-files/waybar
+        dest: ~/.config
+        rsync_opts:
+          - "--archive"
+          - "--verbose"
+          - "--human-readable"
+          - "--progress"
 # Download & install Nerd Font
 
     - name: Create ~/temp directory
