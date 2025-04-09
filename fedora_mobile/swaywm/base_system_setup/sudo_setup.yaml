@@ -39,7 +39,6 @@
         - podman
         - podman-compose
         - podman-docker
-        - wayfire
         - sd
         - tar
         - unzip
@@ -58,6 +57,7 @@
         - "@development-tools"
         - "@libreoffice"
         - "@system-tools"
+        - "@swaywm-extended"
 
 # Download and install Starship
 
