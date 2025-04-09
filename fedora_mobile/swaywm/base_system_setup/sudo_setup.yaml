@@ -68,6 +68,6 @@
         mode: "0755"
 
     - name: Install Starship
-      command: /tmp/starship_install.sh
+      command: /tmp/starship_install.sh -y
       args:
         creates: /usr/local/bin/starship
