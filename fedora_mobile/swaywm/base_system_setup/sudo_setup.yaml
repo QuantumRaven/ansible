@@ -35,7 +35,6 @@
         - zeal
         - lsd
         - fish
-        - bash-completion
         - podman
         - podman-compose
         - podman-docker
