@@ -31,32 +31,3 @@ Configure user account
 ```bash
 $ ansible-playbook -i inventory.ini fedora/wayfire/base_system_setup/user_setup.yaml --limit=[group_name or device_name]
 ```
-
-KDE setup
-
-Install applications with `sudo_user.yaml` first
-
-```bash
-$ ansible-playbook -i inventory.ini fedora/kde_6/base_system_setup/sudo_user.yaml -K --limit=[group_name or device_name]
-```
-
-Configure user account
-
-```bash
-$ ansible-playbook -i inventory.ini fedora/kde_6/base_system_setup/user_setup.yaml --limit=[group_name or device_name]
-```
-
-Cosmic setup
-
-Install applications with `sudo_user.yaml` first
-
-```bash
-$ ansible-playbook -i inventory.ini fedora/cosmic_desktop/base_system_setup/sudo_user.yaml -K --limit=[group_name or device_name]
-```
-
-Configure user account
-
-```bash
-$ ansible-playbook -i inventory.ini fedora/cosmic_desktop/base_system_setup/user_setup.yaml --limit=[group_name or device_name]
-```
-
