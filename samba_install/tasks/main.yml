@@ -1,2 +1,36 @@
 ---
 # tasks file for samba_install
+
+- name: Install Samba and CIFS utilities
+  dnf:
+    name:
+      - samba
+      - cifs-utils
+    state: present
+
+- name: Start and enable samba services
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - smb
+    - nmb
+
+- name: Create a directory for Samba share
+  file:
+    path: /srv/samba/share
+    state: directory
+    mode: "0777"
+
+- name: Configure Samba share
+  lineinfile:
+    path: /etc/samba/smb.conf
+    line: |
+      [Share]
+      path = /srv/samba/share
+      browseable = yes
+      read only = no
+      guest ok = yes
+      force user = nobody
+    notify: restart samba
