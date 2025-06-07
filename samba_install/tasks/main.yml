@@ -47,3 +47,8 @@
     name: corvidae
     groups: wheel
     append: yes
+
+- name: Set password for 'corvidae'
+  user:
+    name: corvidae
+    password: "{{ corvidae_password | password_hash('sha512') }}"
