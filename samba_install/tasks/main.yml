@@ -34,21 +34,3 @@
       guest ok = yes
       force user = nobody
     notify: restart samba
-
-- name: Create user 'corvidae'
-  user:
-    name: corvidae
-    state: present
-    shell: /bin/bash
-    create_home: yes
-
-- name: Add 'corvidae' to sudo group
-  user:
-    name: corvidae
-    groups: wheel
-    append: yes
-
-- name: Set password for 'corvidae'
-  user:
-    name: corvidae
-    password: "{{ corvidae_password | password_hash('sha512') }}"
