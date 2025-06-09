@@ -1,7 +1,0 @@
----
-- name: Play for 
-  hosts: all
-  become: true
-  remote_user: quantumcrow
-  gather_facts: true
-  tasks:
