@@ -1,6 +1,0 @@
----
-- name: Configure Samba and CIFS on AlmaLinux
-  hosts: nas
-  become: true
-  roles:
-    - samba_install
