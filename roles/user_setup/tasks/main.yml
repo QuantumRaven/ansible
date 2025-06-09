@@ -1,2 +1,43 @@
 ---
 # tasks file for user_setup
+
+- name: Create user and install Neovim with AstroNvim
+  hosts: all
+  become: yes  # Use sudo to run the tasks as a privileged user
+  tasks:
+    - name: Create user corvidae
+      user:
+        name: corvidae
+        state: present
+        groups: wheel
+        shell: /bin/bash
+
+    - name: Install Neovim
+      package:
+        name: neovim
+        state: present
+
+    - name: Install dependencies for AstroNvim
+      package:
+        name:
+          - git
+          - ripgrep
+          - fd
+          - python3-neovim
+        state: present
+
+    - name: Clone AstroNvim repository
+      git:
+        repo: https://github.com/AstroNvim/AstroNvim
+        dest: /home/corvidae/.config/nvim
+        version: main
+        force: yes
+      become: yes
+      become_user: corvidae
+
+    - name: Set permissions for AstroNvim config
+      file:
+        path: /home/corvidae/.config/nvim
+        owner: corvidae
+        group: corvidae
+        mode: '0755'

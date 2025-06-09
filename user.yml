@@ -1,0 +1,6 @@
+---
+- name: Create user corvidae and install neovim with AstroNvim
+  hosts: all
+  become: true
+  roles:
+    - user_setup
