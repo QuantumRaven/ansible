@@ -2,7 +2,6 @@
 # tasks file for user_setup
 
 - name: Create user and install Neovim with AstroNvim
-  hosts: all
   become: yes  # Use sudo to run the tasks as a privileged user
   tasks:
     - name: Create user corvidae
