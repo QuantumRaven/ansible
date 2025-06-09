@@ -1,0 +1,9 @@
+---
+# tasks file for user_setup
+
+- name: Create user
+  user:
+    name: corvidae
+    state: present
+    groups: wheel
+    shell: /bin/bash
