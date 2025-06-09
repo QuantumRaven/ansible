@@ -33,4 +33,4 @@
       read only = no
       guest ok = yes
       force user = nobody
-    notify: restart samba
+
