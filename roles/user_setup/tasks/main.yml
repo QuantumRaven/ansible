@@ -7,3 +7,12 @@
     state: present
     groups: wheel
     shell: /bin/bash
+
+- name: Install applications
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - git
+    - curl
+    - wget
