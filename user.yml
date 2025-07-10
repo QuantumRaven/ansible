@@ -1,6 +1,6 @@
 ---
 - name: Create user and setup neovim
-  hosts: nas
+  hosts: all
   become: true
   roles:
     - user_setup
